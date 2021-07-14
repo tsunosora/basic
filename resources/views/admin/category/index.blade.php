@@ -36,16 +36,17 @@
                             </thead>
                             <tbody>
                                 <!-- Proses pengambilan data dari database -->
+                                    <!-- @php($i = 1) -->
                                 @foreach($categories as $category)
                                 <tr> 
-                                    <th scope="row">{{ $category->id }}</th>
+                                    <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
                                     <td>{{ $category->category_name }}</td>
-                                    <td>{{ $category->user_id }}</td>
+                                    <td>{{ $category->user->name }}</td>
                                     <td>
                                         @if($category->created_at == NULL)
                                         <span class="text-danger"> No Date Created </span>
                                         @else
-                                    {{ $category->created_at->diffForHumans() }}
+                                    {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
                                         @endif
                                     </td>
                                 </tr>
@@ -53,6 +54,7 @@
 
                             </tbody>
                         </table>
+                        {{ $categories->links() }}
 
                     </div>
                 </div>
