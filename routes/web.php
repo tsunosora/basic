@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\BrandController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,13 @@ Route::get('/category/restore/{id}', [CategoryController::class, 'Restore']);
 Route::get('/category/destroy/{id}', [CategoryController::class, 'Destroy']);
 
 Route::get('/contactasda-asdad', [ContactController::class, 'index'])->name('con');
+
+///Untuk Brand Route
+Route::get('/brand/all', [BrandController::class, 'AllBrand'])->name('all.brand');
+
+
+///end Brand Route
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
     // $users = User::all();
