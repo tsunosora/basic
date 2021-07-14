@@ -41,6 +41,8 @@ Route::get('/contactasda-asdad', [ContactController::class, 'index'])->name('con
 
 ///Untuk Brand Route
 Route::get('/brand/all', [BrandController::class, 'AllBrand'])->name('all.brand');
+Route::post('/brand/add', [BrandController::class, 'AddBrand'])->name('store.brand');
+
 
 
 ///end Brand Route
