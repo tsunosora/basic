@@ -20,7 +20,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
-                        
+
                         <div class="card-header">All Category
                         </div>
 
@@ -37,9 +37,9 @@
                             </thead>
                             <tbody>
                                 <!-- Proses pengambilan data dari database -->
-                                    <!-- @php($i = 1) -->
+                                <!-- @php($i = 1) -->
                                 @foreach($categories as $category)
-                                <tr> 
+                                <tr>
                                     <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
                                     <td>{{ $category->category_name }}</td>
                                     <td>{{ $category->user->name }}</td>
@@ -47,13 +47,13 @@
                                         @if($category->created_at == NULL)
                                         <span class="text-danger"> No Date Created </span>
                                         @else
-                                    {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
+                                        {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
                                         @endif
                                     </td>
 
                                     <td>
                                         <a href="{{ url('category/edit/'.$category->id) }}" class="btn btn-info">Edit</a>
-                                        <a href="" class="btn btn-danger">Delete</a>
+                                        <a href="{{ url('softdelete/category/'.$category->id) }}" class="btn btn-danger">Delete</a>
                                     </td>
 
                                 </tr>
@@ -81,7 +81,9 @@
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Add Category</button>
+                                    <div style="padding-top: 10px;">
+                                        <button type="submit" class="btn btn-primary">Add Category</button>
+                                    </div>
                             </form>
                         </div>
                     </div>
@@ -90,5 +92,77 @@
             </div>
         </div>
 
-    </div>
+
+
+        <!-- Table trashCat -->
+
+        <div class="container" style="padding-top: 10px;">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+
+
+
+                        <div class="card-header">Tempat Sampah </div>
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">SL No</th>
+                                    <th scope="col">Category Name</th>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Created At</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Proses pengambilan data dari database -->
+                                <!-- @php($i = 1) -->
+                                @foreach($trashCat as $category)
+                                <tr>
+                                    <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
+                                    <td>{{ $category->category_name }}</td>
+                                    <td>{{ $category->user->name }}</td>
+                                    <td>
+                                        @if($category->created_at == NULL)
+                                        <span class="text-danger"> No Date Created </span>
+                                        @else
+                                        {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ url('category/restore/'.$category->id) }}" class="btn btn-info">Restore</a>
+                                        <a href="{{ url('category/destroy/'.$category->id) }}" class="btn btn-danger">Destroy</a>
+                                    </td>
+
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                        {{ $trashCat->links() }}
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
 </x-app-layout>
